@@ -1,0 +1,15 @@
+replicaCount: 2
+
+image:
+  repository: registry.sighup.io/workshop/app
+  tag: "prod"
+  pullPolicy: IfNotPresent
+
+service:
+  name: simple-web-app-service
+  type: NodePort
+  port: 8887
+  targetPort: 8887
+
+env:
+  name: dev
