@@ -24,12 +24,15 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // Use SonarScanner installed in Jenkins
                     def scannerHome = tool 'SonarScanner'
 
-                    // Run SonarQube analysis
                     withSonarQubeEnv('SonarQube') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh """
+                           ${scannerHome}/bin/sonar-scanner \
+                           -Dsonar.projectKey=simple-web-app \
+                           -Dsonar.projectName="Simple Web App" \
+                           -Dsonar.sources=.
+                        """
                     }
                 }
             }
