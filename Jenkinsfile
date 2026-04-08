@@ -7,7 +7,7 @@ pipeline {
             steps {
                 git branch: 'main',
                     credentialsId: '611b6d29-4688-45b3-80aa-31bfcf23fa61',
-                    url: 'https://github.com/tc-bilal/simple-web-app-main'
+                    url: 'https://github.com/tc-bilal/simple-web-app-main.git'
             }
         }
 
@@ -29,6 +29,17 @@ pipeline {
                         -Dsonar.sources=.
                         """
                     }
+                }
+            }
+        }
+
+        stage('AppScan Analysis') {
+            steps {
+                script {
+                    def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
+                    bat "${appScanPath} help"
+                    // Uncomment and adjust for actual scan:
+                    // bat "${appScanPath} scan /scan /project \"${WORKSPACE}\\simple-web-app-main\" /results \"${WORKSPACE}\\AppScanResults\""
                 }
             }
         }
