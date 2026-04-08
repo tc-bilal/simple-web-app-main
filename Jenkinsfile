@@ -39,8 +39,9 @@ pipeline {
                     def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
 
                     echo "Running HCL AppScan on Windows node..."                    
-                    // Uncomment and adjust for actual scan:
-                    bat "${appScanPath} scan /scan /project \"${WORKSPACE}\\simple-web-app-main\" /results \"${WORKSPACE}\\AppScanResults\""
+
+                    // Fixed bat command:
+                    bat "${appScanPath} scan /scan /dest_scan \"${WORKSPACE}\\AppScanResults\""
                 }
             }
         }
