@@ -5,14 +5,6 @@ pipeline {
         skipDefaultCheckout() // prevents Jenkins from double-checking out
     }
 
-    stages {
-
-        stage('Test AppScan') {
-            steps {
-                bat '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe" help'
-            }
-        }
-
         stage('Checkout') {
             steps {
                 git branch: 'main',
