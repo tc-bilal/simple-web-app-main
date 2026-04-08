@@ -33,18 +33,20 @@ pipeline {
         }
 
         stage('AppScan Analysis') {
-            agent { label 'windows-appscan' }  // Ensures this stage runs only on a Windows node
-            steps {
-                script {
-                    def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
+    agent { label 'windows-appscan' }
+    steps {
+        script {
+            def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
             def destFolder = "${WORKSPACE}\\AppScanResults"
 
             // Ensure destination folder exists
             bat "if not exist \"${destFolder}\" mkdir \"${destFolder}\""
 
             echo "Running HCL AppScan on Windows node..."
+            
+            // Corrected bat command
             bat "${appScanPath} exec /surl \"http://localhost:8887/\" /dest_scan \"${destFolder}\" /verbose"
-                }
+        }
             }
         }
     }
