@@ -41,7 +41,7 @@ pipeline {
                     echo "Running HCL AppScan on Windows node..."                    
 
                     // Fixed bat command:
-                    bat "${appScanPath} exec /dest_scan \"${WORKSPACE}\\AppScanResults\" /verbose"
+                    bat "\"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe\" exec /surl \"http://localhost:8080\" /dest_scan \"${WORKSPACE}\\AppScanResults\" /verbose"
                 }
             }
         }
