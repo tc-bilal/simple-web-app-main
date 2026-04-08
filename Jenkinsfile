@@ -1,10 +1,8 @@
 pipeline {
     agent any
+    options { skipDefaultCheckout() }
 
-    options {
-        skipDefaultCheckout() // prevents Jenkins from double-checking out
-    }
-
+    stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -23,16 +21,16 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool 'SonarScanner'
-
                     withSonarQubeEnv('SonarQube') {
                         sh """
-                           ${scannerHome}/bin/sonar-scanner \
-                           -Dsonar.projectKey=simple-web-app \
-                           -Dsonar.projectName="Simple Web App" \
-                           -Dsonar.sources=.
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=simple-web-app \
+                        -Dsonar.projectName="Simple Web App" \
+                        -Dsonar.sources=.
                         """
                     }
                 }
             }
         }
     }
+}
