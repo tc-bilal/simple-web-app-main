@@ -34,7 +34,7 @@ pipeline {
         }
 
         stage('AppScan Analysis') {
-            agent { label 'windows' }  // Ensures this stage runs only on a Windows node
+            agent { label 'windows-appscan' }  // Ensures this stage runs only on a Windows node
             steps {
                 script {
                     def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
