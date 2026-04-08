@@ -37,11 +37,13 @@ pipeline {
             steps {
                 script {
                     def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
+            def destFolder = "${WORKSPACE}\\AppScanResults"
 
-                    echo "Running HCL AppScan on Windows node..."                    
+            // Ensure destination folder exists
+            bat "if not exist \"${destFolder}\" mkdir \"${destFolder}\""
 
-                    // Fixed bat command:
-                    bat "${appScanPath} exec /surl \"http://localhost:8887/\" /dest_scan \"${WORKSPACE}\\AppScanResults\" /verbose"
+            echo "Running HCL AppScan on Windows node..."
+            bat "${appScanPath} exec /surl \"http://localhost:8887/\" /dest_scan \"${destFolder}\" /verbose"
                 }
             }
         }
