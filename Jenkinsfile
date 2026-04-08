@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'node'   // <-- use the exact name you gave in Jenkins tools
+    }
+
     options {
         skipDefaultCheckout() // prevents Jenkins from double-checking out
     }
