@@ -45,8 +45,8 @@ pipeline {
     
                 echo "Running HCL AppScan on Windows node..."
     
-                // Correct command with proper quotes for spaces
-                bat "${appScanPath} exec /surl http://localhost:8887/ /dest_scan ${destFolder} /stemplate ${templatePath} /verbose"
+                // Correct command order: /stemplate first, then /surl, then /dest_scan
+                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://localhost:8887/ /dest_scan ${destFolder} /verbose"
                 }
             }
         }
