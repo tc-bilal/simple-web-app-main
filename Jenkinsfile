@@ -38,18 +38,23 @@ pipeline {
             script {
                 def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
                 def workspaceResults = "${WORKSPACE}\\AppScanResults"
-                def templatePath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\Templates\\RegularScan.scant"'
-                def reportFile = "${workspaceResults}\\AppScanReport.pdf"
+                def templatePath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\Templates\\ProductionSite.scant"'
+    
+                // Generate timestamp for unique report file
+                def timestamp = new Date().format("yyyyMMdd_HHmmss")
+                def reportFile = "${workspaceResults}\\AppScanReport_${timestamp}.pdf"  // PDF for graphical output
     
                 // Ensure results folder exists
                 bat "if not exist ${workspaceResults} mkdir ${workspaceResults}"
     
-                echo "Running HCL AppScan and generating report in workspace..."
+                echo "Running HCL AppScan and generating graphical report..."
     
-                // Generate XML report directly
-                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://localhost:8887/ /report_file ${reportFile} /report_type pdf /verbose"
+                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://192.168.1.9:8887/ /report_file ${reportFile} /report_type Pdf /verbose"
     
-                echo "AppScan completed. Report saved at ${reportFile}"
+                echo "AppScan completed. PDF report saved at ${reportFile}"
+    
+                // Optionally, archive the report in Jenkins
+                archiveArtifacts artifacts: "AppScanResults/AppScanReport_${timestamp}.pdf", allowEmptyArchive: true
                 }
             }
         }
