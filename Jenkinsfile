@@ -37,16 +37,19 @@ pipeline {
         steps {
             script {
                 def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
-                def destFolder = "${WORKSPACE}\\AppScanResults"
+                def workspaceResults = "${WORKSPACE}\\AppScanResults"
                 def templatePath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\Templates\\ProductionSite.scant"'
+                def reportFile = "${workspaceResults}\\AppScanReport.xml"
     
-                // Ensure destination folder exists
-                bat "if not exist ${destFolder} mkdir ${destFolder}"
+                // Ensure results folder exists
+                bat "if not exist ${workspaceResults} mkdir ${workspaceResults}"
     
-                echo "Running HCL AppScan on Windows node..."
+                echo "Running HCL AppScan and generating report in workspace..."
     
-                // Correct command order: /stemplate first, then /surl, then /dest_scan
-                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://localhost:8887/ /dest_scan ${destFolder} /verbose"
+                // Generate XML report directly
+                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://localhost:8887/ /report_file ${reportFile} /report_type Xml /verbose"
+    
+                echo "AppScan completed. Report saved at ${reportFile}"
                 }
             }
         }
