@@ -38,7 +38,7 @@ pipeline {
             script {
                 def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
                 def workspaceResults = "${WORKSPACE}\\AppScanResults"
-                def templatePath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\Templates\\ProductionSite.scant"'
+                def templatePath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\Templates\\RegularScan.scant"'
                 def reportFile = "${workspaceResults}\\AppScanReport.xml"
     
                 // Ensure results folder exists
