@@ -45,7 +45,7 @@ pipeline {
             echo "Running HCL AppScan on Windows node..."
             
             // Corrected bat command
-            bat "${appScanPath} exec /surl \"http://localhost:8887/\" /dest \"${destFolder}\" /verbose"
+            bat "${appScanPath} exec /surl \"http://localhost:8887/\" /dest_scan \"${destFolder}\" /verbose"
         }
             }
         }
