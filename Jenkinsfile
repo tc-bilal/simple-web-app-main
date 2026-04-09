@@ -39,7 +39,7 @@ pipeline {
                 def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
                 def workspaceResults = "${WORKSPACE}\\AppScanResults"
                 def templatePath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\Templates\\RegularScan.scant"'
-                def reportFile = "${workspaceResults}\\AppScanReport.xml"
+                def reportFile = "${workspaceResults}\\AppScanReport.pdf"
     
                 // Ensure results folder exists
                 bat "if not exist ${workspaceResults} mkdir ${workspaceResults}"
@@ -47,7 +47,7 @@ pipeline {
                 echo "Running HCL AppScan and generating report in workspace..."
     
                 // Generate XML report directly
-                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://localhost:8887/ /report_file ${reportFile} /report_type Xml /verbose"
+                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://localhost:8887/ /report_file ${reportFile} /report_type pdf /verbose"
     
                 echo "AppScan completed. Report saved at ${reportFile}"
                 }
