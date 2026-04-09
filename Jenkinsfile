@@ -35,17 +35,18 @@ pipeline {
         stage('AppScan Analysis') {
     agent { label 'windows-appscan' }
     steps {
-        script {
+         script {
             def appScanPath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\AppScanCMD.exe"'
             def destFolder = "${WORKSPACE}\\AppScanResults"
+            def templatePath = '"C:\\Program Files (x86)\\HCL\\AppScan Standard\\Templates\\ProductionSite.scant"'
 
             // Ensure destination folder exists
             bat "if not exist \"${destFolder}\" mkdir \"${destFolder}\""
 
             echo "Running HCL AppScan on Windows node..."
-            
-            // Corrected bat command
-            bat "${appScanPath} exec /surl \"http://localhost:8887/\" /dest_scan \"${destFolder}\" /verbose"
+
+            // Corrected bat command with scan template
+            bat "${appScanPath} exec /surl \"http://localhost:8887/\" /dest \"${destFolder}\" /stemplate ${templatePath} /verbose"
         }
             }
         }
