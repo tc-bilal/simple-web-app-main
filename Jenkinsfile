@@ -53,8 +53,6 @@ pipeline {
     
                 echo "AppScan completed. PDF report saved at ${reportFile}"
     
-                // Optionally, archive the report in Jenkins
-                archiveArtifacts artifacts: "AppScanResults/AppScanReport_${timestamp}.pdf", allowEmptyArchive: true
                 }
             }
         }
