@@ -18,7 +18,7 @@ pipeline {
 
     stage('Docker Build & Run') {
     steps {
-        bat '''
+        sh '''
         docker build -t test/app:latest .
 
         docker stop test-app || exit 0
