@@ -61,7 +61,7 @@ stage('Docker Build & Run') {
     
                 echo "Running HCL AppScan and generating graphical report..."
     
-                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://192.168.1.9:8887/ /report_file ${reportFile} /report_type Pdf /verbose"
+                bat "${appScanPath} exec /stemplate ${templatePath} /surl http://192.168.1.183:8887/ /report_file ${reportFile} /report_type Pdf /verbose"
     
                 echo "AppScan completed. PDF report saved at ${reportFile}"
     
