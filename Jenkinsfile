@@ -56,5 +56,17 @@ pipeline {
                 }
             }
         }
+        stage('Docker Build & Run') {
+    steps {
+        bat '''
+        docker build -t test/app:latest .
+
+        docker stop test-app || exit 0
+        docker rm test-app || exit 0
+
+        docker run -d -p 8887:8887 --name test-app test/app:latest
+        '''
+    }
+}
     }
 }
