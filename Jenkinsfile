@@ -16,6 +16,7 @@ pipeline {
             }
         }
 
+stage('Docker Build & Run') {
     steps {
         sh '''
         docker build -t test/app:latest .
